@@ -315,11 +315,20 @@ header.site{
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .kcard p{margin-top:.7rem;font-size:.95rem;color:var(--ink-soft);font-weight:500}
 .kpi-note{background:linear-gradient(120deg,var(--mist),var(--pastel-light));
-  border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.8rem;display:grid;gap:.7rem}
-.kpi-note p{font-size:.95rem;color:var(--ink);display:flex;gap:.7rem;align-items:flex-start}
-.kpi-note p::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;margin-top:.5rem;
-  background:var(--tech)}
-.kpi-note strong{color:var(--navy)}
+  border:1px solid var(--line);border-radius:18px;padding:2rem 2.2rem 1.8rem}
+.kpi-insights{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem;margin-bottom:1.4rem}
+.kpi-insight{display:flex;flex-direction:column;gap:.35rem}
+.ki-src{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--blue)}
+.ki-num{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,3vw,2.4rem);
+  line-height:1;letter-spacing:-.03em;
+  background:linear-gradient(120deg,var(--tech),var(--blue));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi-insight p{font-size:.91rem;color:var(--ink-soft);line-height:1.55}
+.ki-divider{width:1px;height:72px;background:var(--line);border-radius:2px;flex-shrink:0}
+.ki-cta{font-size:.95rem;color:var(--ink-soft);padding-top:1.2rem;
+  border-top:1px solid var(--line);line-height:1.7}
+.ki-cta strong{color:var(--navy)}
 .kpi-source{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);text-align:center;margin-top:1rem}
 .kcard p sup,.kpi-note sup{font-size:.62em;color:var(--blue);font-weight:700;margin-left:1px}
 .kpi-source sup{color:var(--blue)}
@@ -331,7 +340,8 @@ header.site{
   display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
   box-shadow:var(--shadow-lg)}
 .expert-band::after{content:"";position:absolute;right:-8%;bottom:-60%;width:420px;height:420px;
-  background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%)}
+  background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);pointer-events:none}
+.btn-light{position:relative;z-index:2}
 .expert-band h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3vw,2.3rem);
   line-height:1.1;letter-spacing:-.02em;max-width:30rem;position:relative}
 .expert-band p{color:rgba(255,255,255,.8);margin-top:.5rem;max-width:30rem;position:relative}
@@ -442,12 +452,31 @@ footer.site::before{content:"";position:absolute;top:0;left:0;right:0;height:3px
   .domain-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr}
   .why-figure .stat{left:0}
+  /* Bulles flottantes cachent les visages sur mobile → on les retire */
+  .float-card{display:none}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:680px){
+  .kpi-grid{grid-template-columns:1fr}
+  .kpi-insights{grid-template-columns:1fr;gap:1.2rem}
+  .ki-divider{width:100%;height:1px}
+  .expert-band{flex-direction:column;align-items:stretch;text-align:center;gap:1.4rem}
+  .expert-band h2,.expert-band p{max-width:100%}
+  .btn-light{justify-content:center}
+  .kcard{padding:1.6rem 1.4rem}
 }
 @media(max-width:560px){
   .row-2{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
-  .hero{padding:3.5rem 0}
+  .hero{padding:2.8rem 0 2rem}
   .brand img{height:52px}
+  .why{padding:3.5rem 0}
+  .kpi{padding:3rem 0}
+  .domains{padding:3rem 0}
+  .formation{padding:3rem 0}
+  .expert{padding:.5rem 0 3rem}
+  .contact{padding:3rem 0 3.5rem}
+  .kpi-note{padding:1.6rem 1.4rem}
 }
 </style>
 </head>
@@ -592,12 +621,20 @@ footer.site::before{content:"";position:absolute;top:0;left:0;right:0;height:3px
       </div>
     </div>
     <div class="kpi-note reveal d1">
-      <p>Selon <strong>McKinsey</strong>, la personnalisation et la tarification dynamique pilotées
-        par l'IA peuvent augmenter les revenus d'un hôtel de <strong>3 à 10% par an</strong>, sans
-        hausse du taux d'occupation.<sup>3</sup></p>
-      <p>L'IA générative apporte aussi <strong>+14% de productivité</strong> dans les métiers de la
-        relation client.<sup>3</sup> L'écart se creuse vite : le frein n'est plus la techno, c'est la
-        <strong>formation</strong> et l'accompagnement. C'est exactement notre métier.</p>
+      <div class="kpi-insights">
+        <div class="kpi-insight">
+          <span class="ki-src">McKinsey · 2025</span>
+          <div class="ki-num">+3 à 10 %</div>
+          <p>de revenus annuels supplémentaires grâce à la personnalisation et à la tarification dynamique pilotées par l'IA, sans hausse du taux d'occupation.<sup>3</sup></p>
+        </div>
+        <div class="ki-divider"></div>
+        <div class="kpi-insight">
+          <span class="ki-src">McKinsey · 2025</span>
+          <div class="ki-num">+14 %</div>
+          <p>de productivité dans les métiers de la relation client avec l'IA générative, dès les premiers mois d'adoption.<sup>3</sup></p>
+        </div>
+      </div>
+      <p class="ki-cta">L'écart se creuse rapidement entre les hôtels qui adoptent l'IA et les autres. Le frein n'est plus la technologie : c'est la <strong>formation</strong> et l'<strong>accompagnement</strong>. C'est exactement notre métier.</p>
     </div>
     <p class="kpi-source reveal">Sources : <sup>1</sup> Étude mondiale h2c, 2025 · <sup>2</sup> Compilation sectorielle hôtellerie &amp; IA, 2025 · <sup>3</sup> McKinsey &amp; Company, 2025.</p>
   </div>
